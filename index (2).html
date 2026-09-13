@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeilgids Dodekanesos & Cycladen (Oktober • 35ft • Basis: Kos)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navily: {
+              50: '#f0f7fb',
+              100: '#e1eff7',
+              200: '#bee0ef',
+              300: '#8ec7e3',
+              500: '#00a896', // Navily turquoise
+              600: '#028090', // Navily teal
+              700: '#10558c', // Navily ocean blue
+              800: '#0a3a60', // Navily primary deep blue
+              900: '#05223a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f4f8fa] text-slate-800 min-h-screen p-3 md:p-8 font-sans antialiased">
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Header Section (Navily Coastal Clean Style) -->
+    <header class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-900 bg-amber-100 border border-amber-300 rounded-full flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+              Thuisbasis: Kos Harbor (Archon Yachting)
+            </span>
+            <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-navily-800 bg-navily-50 border border-navily-200 rounded-full">
+              Nautische Schippersgids • Oktober • 35ft
+            </span>
+            <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-full">
+              17 Havens & Ankerlocaties
+            </span>
+          </div>
+          <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-navily-900 tracking-tight">
+            Egeïsche Zee: Beschutting, Cultuur, Fauna & Afstanden
+          </h1>
+          <p class="text-slate-600 text-xs md:text-sm mt-2 max-w-4xl leading-relaxed">
+            Compleet schippersdashboard voor een 35-voets zeiljacht tijdens het overgangsseizoen in oktober. Start en finish vanuit <strong>Kos Harbor (Archon Yachting)</strong> met windtactieken, cultuurhistorie, herfstfauna, najaarsevenementen en een interactieve afstandenkaart.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 bg-navily-50/80 px-4 py-3 rounded-xl border border-navily-100 shadow-sm">
+          <div>
+            <div class="text-[11px] font-mono text-navily-800 font-bold">36°53'38" N, 27°17'42" E</div>
+            <div class="text-[10px] text-slate-500">Kos Port / Marina Base</div>
+          </div>
+          <div class="text-[11px] text-slate-700 border-l sm:border-slate-300 sm:pl-3">
+            Kruissnelheid: <strong class="text-navily-800">5.5 kn</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="mt-5 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="text-xs text-slate-500">
+          <span class="text-navily-700 font-bold">Snel filteren:</span> Typ een eiland, haven of kenmerk om tabellen en kaarten bij te werken:
+        </div>
+        <div class="w-full sm:w-72">
+          <input type="text" id="quickFilter" onkeyup="filterContent()" placeholder="Zoek op Kos, Leros, Amorgos, Vathi..." 
+            class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-navily-700 focus:bg-white transition">
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs (Navily Pill Navigation) -->
+    <nav class="flex overflow-x-auto space-x-2 border-b border-slate-200 pb-2 scrollbar-none" aria-label="Tabs">
+      <button onclick="switchTab('tab-wind')" id="btn-tab-wind" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-bold rounded-lg bg-navily-800 text-white shadow whitespace-nowrap">
+        1. Wind & Beschutting (17 Havens)
+      </button>
+      <button onclick="switchTab('tab-cultuur')" id="btn-tab-cultuur" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-slate-200 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        2. Historie & Lokale Cultuur
+      </button>
+      <button onclick="switchTab('tab-fauna')" id="btn-tab-fauna" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-slate-200 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        3. Lokale Fauna (Oktober)
+      </button>
+      <button onclick="switchTab('tab-events')" id="btn-tab-events" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-slate-200 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        4. Najaarsevenementen (1-14 Okt)
+      </button>
+      <button onclick="switchTab('tab-zeekaart')" id="btn-tab-zeekaart" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-slate-200 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        5. Zeekaartgids (NL / EL / Plotter)
+      </button>
+      <button onclick="switchTab('tab-focus')" id="btn-tab-focus" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-slate-200 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        6. Eilandfocus: Tilos, Astypalaia & Santorini
+      </button>
+      <button onclick="switchTab('tab-kaart')" id="btn-tab-kaart" class="tab-btn px-4 py-2.5 text-xs md:text-sm font-semibold rounded-lg bg-white text-slate-600 border border-navily-500/40 hover:text-navily-800 hover:bg-navily-50 whitespace-nowrap">
+        7. Kaart & Afstanden (NM)
+      </button>
+    </nav>
+
+    <!-- TAB 1: Wind & Beschutting -->
+    <section id="tab-wind" class="tab-panel space-y-5">
+      <!-- Strategy Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-4 rounded-xl bg-white border-l-4 border-amber-500 border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <h3 class="font-bold text-slate-900 text-sm">Thuisbasis Kos (Start & Finish)</h3>
+          </div>
+          <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+            <strong>Kos Harbor / Archon Yachting:</strong> Uitstekende rondombescherming achter het kasteel en havenhoofd. Goede voorzieningen voor proviandering, brandstof en technische check-out voor vertrek.
+          </p>
+          <ul class="text-xs space-y-1 text-slate-700">
+            <li>• <strong class="text-amber-800">Aanmeren:</strong> Lazy lines aan de kades; let op veerbootgolven in de buitenkom.</li>
+            <li>• <strong class="text-amber-800">Invaart:</strong> Rustig bij N-wind; chop bij zware noordoost.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-white border-l-4 border-navily-500 border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3 h-3 rounded-full bg-navily-500"></span>
+            <h3 class="font-bold text-slate-900 text-sm">Top Vluchthavens (Rondom Beschut)</h3>
+          </div>
+          <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+            Voor anker of kade bij plotselinge frontale veranderingen:
+          </p>
+          <ul class="text-xs space-y-1 text-slate-700">
+            <li>• <strong class="text-navily-700">Lakki (Leros):</strong> Veiligste diepe fjord in de Egeïsche Zee.</li>
+            <li>• <strong class="text-navily-700">Maltezana (Astypalaia):</strong> Gesloten zandkom, rustig bij herfstfronten.</li>
+            <li>• <strong class="text-navily-700">Panormitis (Symi):</strong> Totaal beschut binnenmeer op 3-5m zand.</li>
+            <li>• <strong class="text-navily-700">Vathi (Kalymnos):</strong> Smalle fjord met beschutte rotslijnen.</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded-xl bg-white border-l-4 border-rose-500 border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <h3 class="font-bold text-slate-900 text-sm">Gevaar bij Najaars-Sirocco (S / SE)</h3>
+          </div>
+          <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+            Direct verlaten bij draaiing naar het zuiden:
+          </p>
+          <ul class="text-xs space-y-1 text-slate-700">
+            <li>• <strong class="text-rose-700">Vlyhada Marina (Santorini):</strong> Brekers over de zanddrempel.</li>
+            <li>• <strong class="text-rose-700">Livadia (Tilos):</strong> Zware deining drukt jachten op de steiger.</li>
+            <li>• <strong class="text-rose-700">Mandraki (Nisyros):</strong> Open zeegang, ankeren onhoudbaar.</li>
+            <li>• <strong class="text-rose-700">Blefouti (Leros):</strong> Veilige noordelijke schuilbaai bij zuidenwind.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Full Data Table for Tab 1 -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-xs md:text-sm filterable-table">
+          <thead class="bg-navily-50 text-navily-900 uppercase tracking-wider text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Locatie / Haven</th>
+              <th class="p-3.5">Eiland & Regio</th>
+              <th class="p-3.5">Beschutting & Windgedrag (35 ft in Oktober)</th>
+              <th class="p-3.5">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200/80 text-slate-700">
+            <!-- KOS HARBOR -->
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950 flex items-center gap-2">
+                <span>Kos Harbor (Archon Yachting Base)</span>
+                <span class="text-[9px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded border border-amber-300 font-semibold">Start/Finish</span>
+              </td>
+              <td class="p-3.5 text-slate-900 font-medium">Kos (Dodekanesos)</td>
+              <td class="p-3.5">Uitstekend rondom binnen het havenbassin en de marina. Goed beschut tegen de afnemende Meltemi en herfstfronten; lichte swell in de buitenmonding bij harde NE-wind. Vaste mooringlijnen (lazy lines).</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Veilige Thuisbasis</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Lakki ("Lucky")</td>
+              <td class="p-3.5 text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5">Uitstekend rondom. Diepe, natuurlijke schuilbaai; veiligste haven in het gebied.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Veilig rondom</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Panteli</td>
+              <td class="p-3.5 text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5">Goed bij W/SW/NW; open naar E/SE. Chop bij oostenwind; valwinden bij harde noordenwind.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">Open naar E/SE</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Agia Marina</td>
+              <td class="p-3.5 text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5">Matig bij W; open naar E/NE. Ondiep en krap voor 35 ft.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold border border-rose-300">Krap & Ondiep</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Platanos / Blefouti ("Platos")</td>
+              <td class="p-3.5 text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5">Blefouti (noord): top bij S/SE; Platanos is de heuvelstad.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Zuidwind schuilbaai</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Pothia</td>
+              <td class="p-3.5 text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5">Goed bij N/NW/W; swell bij S/SE. Let op valwinden en frequente veerboten.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">Swell bij S/SE</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Vathi ("Vati")</td>
+              <td class="p-3.5 text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5">Fjord: uitstekend rondom; open naar SE. Beperkte plekken aan de kade.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Beschutte Fjord</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Palionisos ("Palamor")</td>
+              <td class="p-3.5 text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5">Zeer goed bij NW/N/W; open naar E. Goed onderhouden taverna-boeien aanwezig.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Goede Mooring</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Livadia</td>
+              <td class="p-3.5 text-slate-600">Tilos (Dodekanesos)</td>
+              <td class="p-3.5">Goed bij NW/W; gevaarlijk bij E/SE. Gemeentekade met lazy lines, stroom en water.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold border border-rose-300">Alert bij E/SE</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Mandraki & Paloi</td>
+              <td class="p-3.5 text-slate-600">Nisyros (Dodekanesos)</td>
+              <td class="p-3.5">Mandraki open naar W/S; Paloi beter bij N/NW. Vermijden bij passerende herfstfronten.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold border border-rose-300">Frontaal kwetsbaar</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Symi / Panormitis ("Siri")</td>
+              <td class="p-3.5 text-slate-600">Symi (Dodekanesos)</td>
+              <td class="p-3.5">Gialos goed bij N/W; Panormitis rondom uitstekend beschut (rondom gesloten kom).</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Panormitis Top</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Skala</td>
+              <td class="p-3.5 text-slate-600">Astypalaia ("Astia")</td>
+              <td class="p-3.5">Redelijk bij N/NW; swell bij S/SE. Kade ligt direct onder het kasteel.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">Matige kadeswell</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Maltezana (Analipsi)</td>
+              <td class="p-3.5 text-slate-600">Astypalaia ("Astia")</td>
+              <td class="p-3.5">Uitstekend rondom. Veilige, diepe binnenbaai met uitstekende ankergrond.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Veilig ankeren</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Katapola</td>
+              <td class="p-3.5 text-slate-600">Amorgos (Cycladen)</td>
+              <td class="p-3.5">Uitstekend bij N/Meltemi; open naar W/SW. Zeer goede havenvoorzieningen.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Meltemi Bestendig</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Potamos / Aegiali</td>
+              <td class="p-3.5 text-slate-600">Amorgos (Cycladen)</td>
+              <td class="p-3.5">Matig bij NW; open naar W/SW. Forse valwinden bij krachtige noordenwind.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">Valwinden</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Finikas & Ermoupoli</td>
+              <td class="p-3.5 text-slate-600">Syros (Cycladen)</td>
+              <td class="p-3.5">Finikas top bij N; Ermoupoli goed rondom beschut door grote buitenpier.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Veilig & Modern</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Vlyhada Μarina / Caldera</td>
+              <td class="p-3.5 text-slate-600">Santorini (Zuidelijke Cycladen)</td>
+              <td class="p-3.5">Vlychada goed bij N/NW; gevaarlijk bij S/SE (brekers drempel). Caldera te diep (150-350m).</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold border border-rose-300">Gevaar bij S-wind</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 2: Historie & Lokale Cultuur -->
+    <section id="tab-cultuur" class="tab-panel hidden space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="cards-cultuur">
+        <!-- 0. Kos Harbor -->
+        <div class="culture-card p-4 bg-white rounded-xl border-2 border-amber-400 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-amber-800 font-bold uppercase tracking-wide">Kos (Start / Finish)</span>
+              <span class="text-[10px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded border border-amber-300 font-semibold">Archon Base</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Kos Harbor (Mandraki & Marina)</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Vader van de Geneeskunde & Johannieter Kasteel:</strong> Kos is de geboorteplaats van Hippocrates. Direct aan de havenmond torent het imposante 14e-eeuwse kasteel van de Johannieter Ridders (Neratzia Castle) met antieke zuilen in de muren. Vlakbij staat de legendarische Plataan van Hippocrates en landinwaarts ligt het beroemde Asklepieion heiligdom.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-amber-800 font-semibold">
+            Erfgoed: Neratzia Kasteel, Hippocrates & Asklepieion
+          </div>
+        </div>
+
+        <!-- 1. Lakki -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Leros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Lakki ("Lucky")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Italiaans Rationalisme & Slag om Leros (1943):</strong> Gebouwd in de jaren '30 onder Mussolini (Portolago). Zeldzaam modernistisch en Art Deco stadsontwerp in Europa met brede boulevards en de ronde bioscoop.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Art Deco architectuur</div>
+        </div>
+
+        <!-- 2. Panteli -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Leros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Panteli</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Authentiek Vissersdorp & Molens:</strong> Traditionele haven waar houten kaïkia binnenvaren. Boven de baai torenen de historische windmolens en het Byzantijnse Kastro van Pandeli uit.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Kaïkia & windmolenkam</div>
+        </div>
+
+        <!-- 3. Agia Marina -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Leros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Agia Marina</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Neoklassieke Koopmanshuizen & Brouzi:</strong> Gebouwd door welvarende Grieken uit Egypte in de 19e eeuw. Aan de havenmonding ligt het Byzantijnse fort Brouzi direct op de waterlijn.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Fort Brouzi</div>
+        </div>
+
+        <!-- 4. Platanos / Blefouti -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Leros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Platanos / Blefouti ("Platos")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Middeleeuws Kasteel van de Johannieter Ridders:</strong> Platanos is de historische hoofdstad onder het 11e-eeuwse Kastro (Panagia Kastro), waar ridders van Sint-Jan eeuwenlang piratenaanvallen afweerden.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Panagia Kastro</div>
+        </div>
+
+        <!-- 5. Pothia -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Kalymnos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Pothia</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Eiland van de Sponsduikers:</strong> Het maritieme centrum van de legendarische Griekse sponsvisserij. De haven ademt zeemansfolklore met het Sponzenmuseum en duikersmonumenten.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Sponzenambacht</div>
+        </div>
+
+        <!-- 6. Vathi -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Kalymnos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Vathi ("Vati")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Oase van Citrusvalleien & Prehistorische Sporen:</strong> Een vruchtbare fjordvallei bewoond sinds de Myceense tijd, met vroege basilieken en een beschutte antieke piratenschuilplaats.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Myceense sporen & Rina fjord</div>
+        </div>
+
+        <!-- 7. Palionisos -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Kalymnos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Palionisos ("Palamor")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Wereldberoemd Klimmekka & Afzondering:</strong> Decennialang enkel per boot bereikbaar; behield zijn ruige geitenhoeders- en visserstraditie tegen de verticale kalksteenwanden.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Klimmerskliffen & geitenpaden</div>
+        </div>
+
+        <!-- 8. Livadia -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Tilos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Livadia</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Dwergolifanten & Ecologisch Pionieren:</strong> Bekend om de Charkadio-grot met fossielen van prehistorische dwergolifanten. Eerste eiland in de Middellandse Zee dat 100% zelfvoorzienend is op groene energie.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Charkadio & Zero-Waste</div>
+        </div>
+
+        <!-- 9. Mandraki & Paloi -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Nisyros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Mandraki & Paloi</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Levende Vulkaan & Cyclopische Muren:</strong> Actieve hydrothermale vulkaankrater Stefanos met zwavel. Boven Mandraki ligt Paleokastro: massieve 4e-eeuwse acropolismuren uit zwart basalt.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Basaltmuren Paleokastro</div>
+        </div>
+
+        <!-- 10. Symi / Panormitis -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Symi</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Dodekanesos</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Symi / Panormitis ("Siri")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Neoklassieke Grandeur & Aartsengel Michaël:</strong> Gialos toont pastelkleurige 19e-eeuwse herenhuizen. In Panormitis staat het beroemde klooster van de beschermheilige van Griekse zeelui.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Panormitis & redersvilla's</div>
+        </div>
+
+        <!-- 11. Skala -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Astypalaia</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Brug Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Skala</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Het Venetiaanse Querini Kasteel:</strong> Brug tussen Dodekanesos en Cycladen. Boven Skala troont de Chora met het donkere stenen Venetiaanse Querini Kasteel en witte koepelkerken.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Querini Kasteel & molens</div>
+        </div>
+
+        <!-- 12. Maltezana -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Astypalaia</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Brug Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Maltezana (Analipsi)</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Malteser Zeerovers & Romeinse Mozaïeken:</strong> Ontleent zijn naam aan ridders en piraten uit Malta. Aan land vind je goed bewaarde Romeinse baden met zodiakmozaïeken (Baths of Talara).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Baden van Talara</div>
+        </div>
+
+        <!-- 13. Katapola -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Amorgos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Katapola</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Panagia Chozoviotissa & Antiek Minoa:</strong> Haven van het antieke Minoa. Vanaf hier bereik je het 11e-eeuwse rotsklooster Chozoviotissa tegen de 300m hoge klif (decor van <em>Le Grand Bleu</em>).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Chozoviotissa-klooster</div>
+        </div>
+
+        <!-- 14. Potamos / Aegiali -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Amorgos</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Potamos / Aegiali</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Traditionele Bergdorpen & Kruidencultuur:</strong> Witte straatjes boven de baai. Beroemd om wilde bergkruiden (oregano, salie) en eeuwenoude geplaveide ezelspaden (kalderimia).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Kalderimia-paden</div>
+        </div>
+
+        <!-- 15. Finikas & Ermoupoli -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-navily-700 font-bold">Syros</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Finikas & Ermoupoli</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Maritieme Hoofdstad, Opera & Rebetiko:</strong> Ermoupoli was het voornaamste handelscentrum in de 19e eeuw (Apollo Theater). Ano Syros is de bakermat van de Rebetiko-muziek (Markos Vamvakaris).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Markos Vamvakaris & Opera</div>
+        </div>
+
+        <!-- 16. Vlyhada / Caldera -->
+        <div class="culture-card p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-navily-500 hover:shadow-md transition">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-amber-700 font-bold">Santorini</span>
+              <span class="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">Zuidelijke Cycladen</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-base mb-1">Vlyhada Μarina / Caldera</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Minoïsche Uitbarsting & Assyrtiko:</strong> Gevormd door de catastrofale Thera-uitbarsting (1600 v.Chr.), gekoppeld aan de Atlantis-legende en Akrotiri. De vulkanische as herbergt mandvormige wijnranken.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Erfgoed: Akrotiri & Assyrtiko mandranken</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Lokale Fauna (Oktober) -->
+    <section id="tab-fauna" class="tab-panel hidden space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-4 bg-white rounded-xl border-t-4 border-amber-500 border border-slate-200 space-y-2 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-900 text-sm">Faunahub Kos & Kustwateren</h4>
+            <span class="text-[10px] bg-amber-100 text-amber-900 px-2 py-0.5 rounded font-semibold border border-amber-300">Start / Finish</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            De zoutpannen bij <strong>Tigaki (Alykes)</strong> herbergen in oktober honderden <strong>roze flamingo's</strong> op herfsttrek. In de zeestraten tussen Kos, Pserimos en Bodrum foerageren scholen <strong>tuimelaars</strong> en leggen <strong>Caretta caretta</strong> zeeschildpadden hun laatste routes af.
+          </p>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border-t-4 border-emerald-500 border border-slate-200 space-y-2 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-900 text-sm">Vogeltrek & Eleonoravalken</h4>
+            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-semibold border border-emerald-300">Oktober Piek</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Op <strong>Tilos</strong> (Natura 2000) en langs de steile kliffen van Leros en Amorgos broedt de Eleonoravalk (<em>Falco eleonorae</em>). Ze jagen op passerende zangvogels op de trekroute van Europa naar Afrika.
+          </p>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border-t-4 border-navily-500 border border-slate-200 space-y-2 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-900 text-sm">Mariene Biodiversiteit & Robben</h4>
+            <span class="text-[10px] bg-navily-100 text-navily-900 px-2 py-0.5 rounded font-semibold border border-navily-300">Pelagisch & Kust</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            In de diepe troggen jagen <strong>gestreepte dolfijnen</strong> op migrerende pelagische vis. Afgelegen zeegrotten bij Tilos, Kalymnos en Amorgos vormen kraamkamers voor de zeldzame <em>Monachus monachus</em>.
+          </p>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-xs md:text-sm filterable-table">
+          <thead class="bg-navily-50 text-navily-900 uppercase tracking-wider text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Locatie / Haven</th>
+              <th class="p-3.5">Eiland</th>
+              <th class="p-3.5">Lokale Fauna Waarnemingen in Oktober</th>
+              <th class="p-3.5">Biotoop / Zeiltip</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200/80 text-slate-700">
+            <!-- KOS FAUNA -->
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950">Kos Harbor (Archon Yachting Base)</td>
+              <td class="p-3.5 text-slate-900 font-medium">Kos</td>
+              <td class="p-3.5">Doortrekkende roze flamingo's en steltlopers in de zoutmeren van Tigaki (Alykes); tuimelaars en onechte karetschildpadden (<em>Caretta caretta</em>) actief in de zeestraat Kos–Pserimos.</td>
+              <td class="p-3.5 text-amber-900 font-semibold">Zeestraat Kos-Pserimos & Alykes wetland</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Lakki ("Lucky")</td>
+              <td class="p-3.5 text-slate-600">Leros</td>
+              <td class="p-3.5">Gestreepte dolfijnen en tuimelaars in de baaimond en zeestraat met Kalymnos; zangvogels op herfsttrek in de parkachtige lanen van Lakki.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Diepe ingang & parklanen</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Panteli</td>
+              <td class="p-3.5 text-slate-600">Leros</td>
+              <td class="p-3.5">Zeevogels (Scopoli's pijlstormvogels) langs de oostkust; scholen najaarsinktvis (kalamari) die 's nachts de beschutte baai intrekken.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Nachtelijke inktvispassage</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Agia Marina</td>
+              <td class="p-3.5 text-slate-600">Leros</td>
+              <td class="p-3.5">Kleine kuststeltlopers en reigers op doortrek langs de ondiepe rotskust; zee-egels en octopussen rond de funderingen van fort Brouzi.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Ondiep rotsrif Brouzi</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Platanos / Blefouti</td>
+              <td class="p-3.5 text-slate-600">Leros</td>
+              <td class="p-3.5">Blefouti-baai is een rustgebied voor watervogels en zilverreigers; Eleonoravalken patrouilleren langs de heuvelkammen richting Partheni.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Heuvelkam & noordbaai</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Pothia</td>
+              <td class="p-3.5 text-slate-600">Kalymnos</td>
+              <td class="p-3.5">Zeezoogdieren (dolfijnen) in het diepe zeegat tussen Kalymnos en Kos; pelagische vissen (tonijn, makreel) migreren langs de zuidkust.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Zeestraat Kalymnos-Kos</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Vathi ("Vati")</td>
+              <td class="p-3.5 text-slate-600">Kalymnos</td>
+              <td class="p-3.5">Kraamkamer voor jonge vis en sepia's in het brakke fjordwater; Hardoen-hagedissen (<em>Stellagama stellio</em>) zonnend op de verticale kalkwanden.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Kalkkliffen & fjordmonding</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Palionisos ("Palamor")</td>
+              <td class="p-3.5 text-slate-600">Kalymnos</td>
+              <td class="p-3.5">Wilde geiten op de steile kliffen; Audouins meeuwen en broedende slechtvalken hoog tegen de rotswanden rond de baai-ingang.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Klimwanden & kreektoppen</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Livadia</td>
+              <td class="p-3.5 text-slate-600">Tilos</td>
+              <td class="p-3.5">Vogelreservaat van internationaal belang: Eleonoravalken jagen actief op herfsttrekvogels; mediterrane monniksrobben in nabijgelegen zeegrotten.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Natura 2000 kliffen</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Mandraki & Paloi</td>
+              <td class="p-3.5 text-slate-600">Nisyros</td>
+              <td class="p-3.5">Arendbuizerds en torenvalken die thermiek pakken op de vulkaanranden; Kourkoutavlos-hagedissen actief op de zonverwarmde zwarte lavastenen.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Thermiek kraterranden</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Symi / Panormitis</td>
+              <td class="p-3.5 text-slate-600">Symi</td>
+              <td class="p-3.5">Monniksrobben rond de afgelegen zuidkapen; doortrekkende roofvogels over de bergkammen; murenes en baarzen in het Panormitis-bekken.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Zuidkapen & binnenlagune</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Skala</td>
+              <td class="p-3.5 text-slate-600">Astypalaia</td>
+              <td class="p-3.5">Kleine kolonies Audouins meeuwen rond de nabije rotseilanden; kuifaalscholvers jagend langs de havenpieren.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Havenpieren & rotseilanden</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Maltezana (Analipsi)</td>
+              <td class="p-3.5 text-slate-600">Astypalaia</td>
+              <td class="p-3.5">Uitstekende kraamkamerbaai: zeeschildpadden (<em>Caretta caretta</em>) fouragerend op zeegrasvelden (Posidonia); pijlstormvogels bij schemering.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Posidonia-zeegrasbedden</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Katapola</td>
+              <td class="p-3.5 text-slate-600">Amorgos</td>
+              <td class="p-3.5">Zeevogelpassage (Mediterrane pijlstormvogels); scholen pelagische vissen die de diepe havenkom aandoen.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Diepe kom & open zeegat</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Potamos / Aegiali</td>
+              <td class="p-3.5 text-slate-600">Amorgos</td>
+              <td class="p-3.5">Alpenkraaien en slechtvalken rond de toppen van berg Krikelos; berggeiten langs eeuwenoude geplaveide geitenpaden (kalderimia).</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Berg Krikelos (821m)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Finikas & Ermoupoli</td>
+              <td class="p-3.5 text-slate-600">Syros</td>
+              <td class="p-3.5">Zeegrasvelden met zeepaardjes en inktvissen bij Finikas; zeevogels en reigers op doortrek langs de zuidelijke baaien.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Beschutte zuidkust</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Vlyhada / Caldera</td>
+              <td class="p-3.5 text-slate-600">Santorini</td>
+              <td class="p-3.5">Zeevogels (kuifaalscholvers) rustend op de vulkanische puimsteenkusten; zeldzame hagedissen aangepast aan het droge vulkanische microklimaat.</td>
+              <td class="p-3.5 text-emerald-700 font-medium">Witte puimsteenkliffen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: Lokale Najaarsevenementen (1-14 Okt) -->
+    <section id="tab-events" class="tab-panel hidden space-y-4">
+      <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+        <div>
+          <h3 class="font-bold text-navily-900 text-base">Lokale Tradities & Oogst (Eerste 2 weken van Oktober)</h3>
+          <p class="text-xs text-slate-600 mt-0.5">
+            Oktober markeert de najaarsoogst van druiven, olijven en vijgen, informele kadefeesten en afsluitende charter-bijeenkomsten.
+          </p>
+        </div>
+        <span class="px-3 py-1 bg-navily-50 text-navily-800 border border-navily-200 rounded-lg text-xs font-bold">
+          1 - 14 Oktober Agenda
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="cards-events">
+        <!-- 0. Kos Harbor -->
+        <div class="event-card p-4 bg-white rounded-xl border-2 border-amber-400 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-amber-800 font-bold">
+              <span>Kos (Start / Finish)</span>
+              <span class="text-[10px] bg-amber-100 px-1.5 py-0.5 rounded text-amber-900 border border-amber-300 font-semibold">Wijn & Kaas</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Kos Harbor (Archon Yachting Base)</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Afsluiting van de najaarsoogst met wijnproeverijen (o.a. Posa-wijnkaas / Krasotyri gerijpt in rode wijnmoer); informele schippersbijeenkomsten en livemuziek langs de kade van Mandraki.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-amber-800 font-semibold">
+            Tip: Proef lokale Krasotyri & tijmhoning in de oude stad
+          </div>
+        </div>
+
+        <!-- 1. Lakki -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Leros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Herfstmarkten</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Lakki ("Lucky")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Oktober-herfstmarkten & lokale najaarsoogst; herdenkingsactiviteiten rond de Slag om Leros.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Markthallen & herdenkingsmonumenten</div>
+        </div>
+
+        <!-- 2. Panteli -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Leros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Kalamari</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Panteli</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Kalamari-seizoen: avondlijke inktvisvangst door lokale vissers met informele proeverijen in strandtaverna's.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Verse inktvis bij Zorbas</div>
+        </div>
+
+        <!-- 3. Agia Marina -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Leros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Panigyri</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Agia Marina</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Lokale kerkfeestelijkheden (panigyri) van de najaarsheiligen in kapellen met traditionele viool- en luitmuziek.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Viool, luit & dorpsdans</div>
+        </div>
+
+        <!-- 4. Platanos / Blefouti -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Leros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Olijvenoogst</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Platanos / Blefouti</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Begin van de olijvenoogst en kleinschalige dorpsbijeenkomsten rond Platanos met jonge wijn en gedroogde vijgen.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Jonge wijn & zongedroogde vijgen</div>
+        </div>
+
+        <!-- 5. Pothia -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-emerald-700 font-bold">
+              <span>Kalymnos</span>
+              <span class="text-[10px] bg-emerald-50 px-1.5 py-0.5 rounded text-emerald-800 border border-emerald-200 font-semibold">Climbing Fest</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Pothia</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Internationaal Kalymnos Climbing Festival</strong> (jaarlijks begin oktober): sponsduikdemonstraties en livemuziek aan de kade.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-emerald-700 font-medium">Mondiaal klimfestival aan de kade</div>
+        </div>
+
+        <!-- 6. Vathi -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Kalymnos</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Citrus & Raki</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Vathi ("Vati")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Citrusoogst-voorbereiding rond de mandarijnengaarden van Rina; traditionele rakistokerij in het najaar.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Mandarijnenboomgaarden & stookketels</div>
+        </div>
+
+        <!-- 7. Palionisos -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Kalymnos</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Vis-BBQ</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Palionisos ("Palamor")</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Klimmers-ontmoetingen en informele visbarbecues bij de familietaverna's ter afsluiting van het actieve klimseizoen.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Taverna Ilias aan het kiezelstrand</div>
+        </div>
+
+        <!-- 8. Livadia -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Tilos</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Eco & Panigyri</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Livadia</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Agios Ioannis Theologos najaarsfeest & lokale eco-wandelingen; dorpsfeesten met geitenstoofpot en traditionele dans.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Dorpsfeest in Megalo Chorio</div>
+        </div>
+
+        <!-- 9. Mandraki & Paloi -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Nisyros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Soumada</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Mandraki & Paloi</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Feest van Panagia Spiliani en najaarsvieringen in de bergdorpen Nikia en Emporios; traditionele soumada (amandeldrank).
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Kazania-stokerijen in Nikia</div>
+        </div>
+
+        <!-- 10. Symi / Panormitis -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Symi</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Pelgrimage</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Symi / Panormitis</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Voorbereidingen op het grote feest van Aartsengel Michaël; traditionele kerkkoren en maritieme bootzegeningen in de baai.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Maritieme bootzegeningen in de baai</div>
+        </div>
+
+        <!-- 11. Skala -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Astypalaia</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Kasteelfeest</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Skala</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Panagies tou Kastrou bijeenkomsten; dorpsfeesten rond de kasteelheuvel met saffraankoekjes (kitrinokouloura) en tijmhoning.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Kitrinokouloura saffraanbaksels</div>
+        </div>
+
+        <!-- 12. Maltezana -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Astypalaia</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Barbounia</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Maltezana (Analipsi)</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Lokale vissersfeesten rond de seizoensvangst van rode mul (barbounia); ontmoetingen in de kafenions aan het strand.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Verse rode mul in kafenions</div>
+        </div>
+
+        <!-- 13. Katapola -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Amorgos</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Psimeni Raki</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Katapola</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Traditionele Psimeni Raki proeverijen in de cafés rond de havenkade; najaarswandelingen naar het Chozoviotissa-klooster.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Warme raki met honing & kruidnagel</div>
+        </div>
+
+        <!-- 14. Potamos / Aegiali -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Amorgos</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Kruiden</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Potamos / Aegiali</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Kruidenpluk- en distillatieworkshops (wilde salie, oregano) in de heuveldorpen Langada en Tholaria.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Distillatie van bergsalie & tijm</div>
+        </div>
+
+        <!-- 15. Finikas & Ermoupoli -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-navily-700 font-bold">
+              <span>Syros</span>
+              <span class="text-[10px] bg-navily-50 px-1.5 py-0.5 rounded text-navily-800 border border-navily-200">Film & Rebetiko</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Finikas & Ermoupoli</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Syros International Film najaarsvoorstellingen en Rebetiko-muziekavonden in de historische taverna's van Ano Syros.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Live bouzouki in Ano Syros</div>
+        </div>
+
+        <!-- 16. Vlyhada / Caldera -->
+        <div class="event-card p-4 bg-white rounded-xl border border-slate-200 hover:border-navily-500 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center text-xs mb-1 text-amber-700 font-bold">
+              <span>Santorini</span>
+              <span class="text-[10px] bg-amber-50 px-1.5 py-0.5 rounded text-amber-900 border border-amber-200 font-semibold">Assyrtiko Oogst</span>
+            </div>
+            <h4 class="font-bold text-navily-900 text-sm mb-1">Vlyhada Μarina / Caldera</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Einde van het wijnoogstseizoen (Assyrtiko) met proeverijen in de ondergrondse canava's rond Megalochori; zonsondergangconcerten.
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">Canava-proeverijen Megalochori</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Zeekaartgids (NL / EL / Plotter) -->
+    <section id="tab-zeekaart" class="tab-panel hidden space-y-4">
+      <div class="p-4 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed shadow-sm">
+        <strong class="text-navily-800">Navigatie-instructie voor kaartentafels:</strong> Deze tweetalige tabel koppelt de Nederlandse benamingen aan de officiële Griekse transcripties van de <em>Hellenic Navy Hydrographic Service (HNHS)</em> en elektronische plotters (Navionics, Garmin BlueChart, C-Map).
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-xs md:text-sm filterable-table">
+          <thead class="bg-navily-50 text-navily-900 uppercase tracking-wider text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Europese / Kaartnaam</th>
+              <th class="p-3.5">Officiële Griekse Naam (EL)</th>
+              <th class="p-3.5">Eiland & Regio</th>
+              <th class="p-3.5">Nautisch Plotterkenmerk & Coördinaten (35ft)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200/80 text-slate-700 font-mono">
+            <!-- KOS PLOTTER ROW -->
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-sans font-bold text-amber-950">Kos Harbor (Archon Yachting Base)</td>
+              <td class="p-3.5 text-amber-900 font-semibold">Κως / Λιμένας Μανδράκι & Μαρίνα Κω</td>
+              <td class="p-3.5 font-sans text-slate-700 font-medium">Kos (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">
+                <strong class="text-slate-900">36°53'38" N, 27°17'42" E</strong> • Mandraki pier / Kos Marina; lazy lines; VHF 77 (Marina) / VHF 12 (Port); water, diesel, stroom rondom
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Lakki ("Lucky")</td>
+              <td class="p-3.5 text-navily-700">Λακκί / Όρμος Λακκί</td>
+              <td class="p-3.5 font-sans text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°07'52" N, 26°51'07" E • Leros Marina kades & pier; diepgang > 5m; VHF 10</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Panteli</td>
+              <td class="p-3.5 text-navily-700">Παντέλι / Όρμος Παντελίου</td>
+              <td class="p-3.5 font-sans text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°09'18" N, 26°51'32" E • Mooringboeien taverna's; zandgrond 3-5m; chop bij E</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Agia Marina</td>
+              <td class="p-3.5 text-navily-700">Αγία Μαρίνα / Λιμένας</td>
+              <td class="p-3.5 font-sans text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°09'40" N, 26°51'14" E • Stadssteiger ondiep (< 2.2m kadekop); let op rif fort Brouzi</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Platanos / Blefouti ("Platos")</td>
+              <td class="p-3.5 text-navily-700">Πλάτανος & Μπ激发ούτι</td>
+              <td class="p-3.5 font-sans text-slate-600">Leros (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°11'20" N, 26°49'41" E • Blefouti ankerbaai op 4-7m zand; ideale schuilplaats bij najaars-Sirocco</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Pothia</td>
+              <td class="p-3.5 text-navily-700">Πόθια / Λιμήν Καλύμνου</td>
+              <td class="p-3.5 font-sans text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°56'56" N, 26°59'06" E • Commerciële haven; bunkering/diesel; stern-to met anker 4-6m</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Vathi ("Vati")</td>
+              <td class="p-3.5 text-navily-700">Βαθύ / Όρμος Ρίνα</td>
+              <td class="p-3.5 font-sans text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°58'26" N, 27°01'34" E • Fjord inham; kadekop ca. 2.4m; lange lijnen naar rotsen</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Palionisos ("Palamor")</td>
+              <td class="p-3.5 text-navily-700">Παλιόνησος / Όρμος Παλιονήσου</td>
+              <td class="p-3.5 font-sans text-slate-600">Kalymnos (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°03'14" N, 26°57'47" E • Diepe kreek (10-18m); gele mooringboeien taverna's; steile wanden</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Livadia</td>
+              <td class="p-3.5 text-navily-700">Λιβάδια / Λιμήν Τήλου</td>
+              <td class="p-3.5 font-sans text-slate-600">Tilos (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°25'01" N, 27°23'06" E • Jachtpier met lazy lines, water & stroom; diepgang 2.5-3.5m</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Mandraki & Paloi</td>
+              <td class="p-3.5 text-navily-700">Μανδράκι & Πάλοι</td>
+              <td class="p-3.5 font-sans text-slate-600">Nisyros (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°36'54" N, 27°09'00" E • Paloi havenkom (diepgang invaart ca. 2.2m); Mandraki open</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Symi / Panormitis ("Siri")</td>
+              <td class="p-3.5 text-navily-700">Γυαλός & Πανορμίτης</td>
+              <td class="p-3.5 font-sans text-slate-600">Symi (Dodekanesos)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°34'48" N, 27°50'24" E • Gialos (zeer diep 12-18m); Panormitis (gesloten zandkom op 3-5m)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Skala</td>
+              <td class="p-3.5 text-navily-700">Σκάλα / Όρμος Σκάλας</td>
+              <td class="p-3.5 font-sans text-slate-600">Astypalaia ("Astia")</td>
+              <td class="p-3.5 font-sans text-slate-600">36°32'56" N, 26°21'11" E • Gemeentepier onder kasteel; deining bij veerboten; diepgang 2.8m</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Maltezana (Analipsi)</td>
+              <td class="p-3.5 text-navily-700">Μαλτεζάνα (Ανάληψη)</td>
+              <td class="p-3.5 font-sans text-slate-600">Astypalaia ("Astia")</td>
+              <td class="p-3.5 font-sans text-slate-600">36°34'37" N, 26°23'13" E • Ruime zand- en modderbaai; ankeren op 3-6m met sublieme grip</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Katapola</td>
+              <td class="p-3.5 text-navily-700">Κατάπολα / Όρμος Καταπόλων</td>
+              <td class="p-3.5 font-sans text-slate-600">Amorgos (Cycladen)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°49'41" N, 25°51'50" E • Stern-to kade of ankeren op zand 4-8m; water/stroom aanwezig</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Potamos / Aegiali</td>
+              <td class="p-3.5 text-navily-700">Ποταμός & Αιγιάλη</td>
+              <td class="p-3.5 font-sans text-slate-600">Amorgos (Cycladen)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°54'11" N, 25°58'44" E • Kleine visserspier of ankeren in baai; let op valwinden uit ravijn</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Finikas & Ermoupoli</td>
+              <td class="p-3.5 text-navily-700">Φοίνικας & Ερμούπολη</td>
+              <td class="p-3.5 font-sans text-slate-600">Syros (Cycladen)</td>
+              <td class="p-3.5 font-sans text-slate-600">37°23'50" N, 24°52'37" E • Finikas (luwe steiger, mooring); Ermoupoli (grote handelskade, VHF 12)</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-sans font-bold text-navily-800">Vlyhada Μarina / Caldera</td>
+              <td class="p-3.5 text-navily-700">Βλυχάδα / Καλντέρα Θήρας</td>
+              <td class="p-3.5 font-sans text-slate-600">Santorini (Cycladen)</td>
+              <td class="p-3.5 font-sans text-slate-600">36°20'10" N, 25°25'59" E • Vlyhada: ondiepe zandgeul (1.9-2.2m), roep haven; Caldera: 150-350m</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 6: Eilandfocus (Tilos, Astypalaia & Santorini) -->
+    <section id="tab-focus" class="tab-panel hidden space-y-5">
+      <!-- Functie & Schipperstoelichting -->
+      <div class="p-5 rounded-2xl bg-white border-2 border-navily-500 shadow-sm space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider bg-navily-800 text-white rounded-md">
+            Schippersbriefing • Functie van deze Tab
+          </span>
+          <h3 class="font-bold text-navily-900 text-base md:text-lg">
+            Waarom Eilandfocus? Tactische risicoanalyse voor de 3 sleutelzones
+          </h3>
+        </div>
+        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+          Deze tab fungeert als een <strong class="text-navily-800">diepgaande tactische schippersbriefing</strong> voor de drie meest veeleisende en strategisch bepalende knooppunten op de route tussen vertrekhaven Kos en de centrale Cycladen. In oktober kan het weer snel omslaan van een kalmerende bries naar herfstdepressies uit het zuiden. Hier zijn de standaard havenaanlopen risicovol:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 text-xs">
+          <div class="bg-rose-50/70 p-3 rounded-lg border border-rose-200">
+            <strong class="text-rose-800 block mb-1">1. Sirocco-Alarm (Tilos)</strong>
+            <span class="text-slate-600">Tijdige evacuatie-instructies voor Livadia zodra wind ruimt naar oost of zuidoost om betonschade door zware deining te vermijden.</span>
+          </div>
+          <div class="bg-emerald-50/70 p-3 rounded-lg border border-emerald-200">
+            <strong class="text-emerald-800 block mb-1">2. Vluchthaventactiek (Astypalaia)</strong>
+            <span class="text-slate-600">Kiezen voor de veilige zand-/modderkom van Maltezana in plaats van de swell-gevoelige stenen kade van Skala.</span>
+          </div>
+          <div class="bg-amber-50/70 p-3 rounded-lg border border-amber-200">
+            <strong class="text-amber-800 block mb-1">3. Nautische Uitzondering (Santorini)</strong>
+            <span class="text-slate-600">Onbruikbare kraterdieptes (150-350m) en continue verzanding/brekers op de drempel van Vlyhada Marina.</span>
+          </div>
+          <div class="bg-navily-50 p-3 rounded-lg border border-navily-200">
+            <strong class="text-navily-800 block mb-1">4. Terugkeer naar Kos</strong>
+            <span class="text-slate-600">Vuistregels voor veilige weervensters op de terugroute naar de Archon Yachting basis in Kos Harbor.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Columns Focus Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Tilos Deep Dive -->
+        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div class="flex justify-between items-start">
+            <h3 class="text-lg font-bold text-navily-900">Tilos (Τήλος)</h3>
+            <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-600">Tussenstop Kos - Symi</span>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong class="text-slate-900">Haven Livadia:</strong> Uitgerust met een solide gemeentesteiger met lazy lines, stroom en drinkwater. Ideaal bij rustige noordwestenwinden.</p>
+            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded text-rose-800">
+              <strong>Oktober Risico:</strong> Zodra de wind ruimt naar E of SE loopt er binnen enkele uren een zware swell de baai in die jachten hardhandig tegen de betonsteiger kan drukken. Tijdig wegvaren naar Symi (Panormitis) of Kos!
+            </div>
+            <p><strong class="text-slate-900">Fauna & Natuur:</strong> Broedgebied van Eleonoravalken en havikarenden. Monniksrobben in de grotten van Kaap Agios Petros.</p>
+            <p><strong class="text-slate-900">Evenement:</strong> Agios Ioannis Theologos najaarsfeest en eco-wandelingen rond Megalo Chorio.</p>
+          </div>
+        </div>
+
+        <!-- Astypalaia Deep Dive -->
+        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div class="flex justify-between items-start">
+            <h3 class="text-lg font-bold text-navily-900">Astypalaia (Αστυπάλαια)</h3>
+            <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-600">Brug naar de Cycladen</span>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong class="text-slate-900">Skala Kade:</strong> Schitterende ligging aan de voet van de kasteelrots, maar open voor zuidelijke swell en valwinden bij harde noordenwind.</p>
+            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded text-emerald-800">
+              <strong>Vluchttactiek: Maltezana (Analipsi).</strong> De absolute aanrader voor een 35-voeter bij elk weertype. Volledig beschutte baai met zachte ankergrond in zand/modder op 4 meter.
+            </div>
+            <p><strong class="text-slate-900">Fauna:</strong> Zeeschildpadden in de Posidonia-velden en Audouins meeuwen op de omliggende rotseilanden.</p>
+            <p><strong class="text-slate-900">Evenement:</strong> Panagies tou Kastrou bijeenkomsten en seizoensvangst van rode mul (barbounia).</p>
+          </div>
+        </div>
+
+        <!-- Santorini Deep Dive -->
+        <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
+          <div class="flex justify-between items-start">
+            <h3 class="text-lg font-bold text-navily-900">Santorini (Σαντορίνη / Θήρα)</h3>
+            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-semibold border border-amber-300">Nautische Uitzondering</span>
+          </div>
+          <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+            <p><strong class="text-slate-900">De Caldera:</strong> Waterdieptes van 150 tot 350 meter direct aan de klifwanden maken ankeren onmogelijk. Mooringboeien bij Ammoudi en Fira zijn kwetsbaar voor valwinden.</p>
+            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded text-rose-800">
+              <strong>Vlyhada Marina Drempel:</strong> De enige echte haven, maar de zanderige ingang verzandt continu (diepgang 1.8-2.2m). Bij zuidoostenwind ontstaan zware brekers over de geul.
+            </div>
+            <p><strong class="text-slate-900">Fauna & Geologie:</strong> Vulkanische puimsteenrotsen met kuifaalscholvers en droogteminnende hagedissen.</p>
+            <p><strong class="text-slate-900">Evenement:</strong> Afsluiting Assyrtiko-oogst en wijnproeverijen in ondergrondse canava's.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oversteek Advies 35-voeter -->
+      <div class="p-4 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 space-y-2 shadow-sm">
+        <h4 class="font-bold text-navily-900 text-sm">Passageplanning van en naar Thuisbasis Kos</h4>
+        <p class="leading-relaxed">
+          Met Kos Harbor als vertrek- en aankomstbasis kan de route flexibel worden ingericht: noordwaarts via Kalymnos (15.2 NM) en Leros (25.6 NM), of zuidwaarts via Nisyros (18.1 NM), Tilos (29.0 NM) en Symi (32.3 NM). Voor de grote sprong westwaarts naar Astypalaia (47.7 NM direct vanaf Kos) of de oversteek van Astypalaia naar Amorgos (28.9 NM) is een stabiel weervenster van 24 uur noodzakelijk. Houd bij de terugkeer naar Kos altijd rekening met het invallen van najaars-depressies en zorg dat u minimaal 24 uur voor charter-einde weer in de luwte van Kos ligt.
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 7: Kaart & Afstanden (NM) -->
+    <section id="tab-kaart" class="tab-panel hidden space-y-5">
+      
+      <!-- Interactive Calculator Bar -->
+      <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div class="space-y-0.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-navily-600"></span>
+            <h3 class="text-sm md:text-base font-bold text-navily-900">Nautische Afstands- & Vaartijdcalculator (35 ft • 5.5 kn)</h3>
+          </div>
+          <p class="text-xs text-slate-600">Kies een willekeurige vertrek- en bestemmingshaven inclusief basis Kos Harbor (Archon Yachting).</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <select id="calcFrom" class="bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-navily-600">
+            <option value="kos" selected>★ Kos Harbor (Archon Yachting)</option>
+            <option value="lakki">Lakki (Leros)</option>
+            <option value="panteli">Panteli (Leros)</option>
+            <option value="blefouti">Platanos/Blefouti (Leros)</option>
+            <option value="pothia">Pothia (Kalymnos)</option>
+            <option value="vathi">Vathi (Kalymnos)</option>
+            <option value="palionisos">Palionisos (Kalymnos)</option>
+            <option value="livadia">Livadia (Tilos)</option>
+            <option value="nisyros">Mandraki/Paloi (Nisyros)</option>
+            <option value="symi">Symi / Panormitis</option>
+            <option value="skala">Skala (Astypalaia)</option>
+            <option value="maltezana">Maltezana (Astypalaia)</option>
+            <option value="katapola">Katapola (Amorgos)</option>
+            <option value="aegiali">Potamos/Aegiali (Amorgos)</option>
+            <option value="syros">Finikas/Ermoupoli (Syros)</option>
+            <option value="santorini">Vlyhada/Caldera (Santorini)</option>
+          </select>
+          <span class="text-xs text-navily-600 font-bold">&rarr;</span>
+          <select id="calcTo" class="bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-navily-600">
+            <option value="pothia" selected>Pothia (Kalymnos)</option>
+            <option value="kos">★ Kos Harbor (Archon Yachting)</option>
+            <option value="lakki">Lakki (Leros)</option>
+            <option value="palionisos">Palionisos (Kalymnos)</option>
+            <option value="livadia">Livadia (Tilos)</option>
+            <option value="nisyros">Mandraki/Paloi (Nisyros)</option>
+            <option value="symi">Symi / Panormitis</option>
+            <option value="skala">Skala (Astypalaia)</option>
+            <option value="maltezana">Maltezana (Astypalaia)</option>
+            <option value="katapola">Katapola (Amorgos)</option>
+            <option value="aegiali">Potamos/Aegiali (Amorgos)</option>
+            <option value="syros">Finikas/Ermoupoli (Syros)</option>
+            <option value="santorini">Vlyhada/Caldera (Santorini)</option>
+          </select>
+          <button onclick="calculateRoute()" class="px-4 py-1.5 bg-navily-800 hover:bg-navily-700 text-white font-bold rounded-lg text-xs shadow-sm transition">
+            Bereken
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Calculation Result Box -->
+      <div id="calcResultBox" class="p-3.5 bg-navily-50 rounded-xl border border-navily-200 text-xs flex flex-wrap items-center justify-between gap-3 text-slate-700">
+        <div class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-navily-600 animate-ping"></span>
+          <span id="calcSummary">Selecteer twee havens en klik op <strong>Bereken</strong> voor exacte afstand in zeemijlen en vaartijd.</span>
+        </div>
+        <div id="calcBadge" class="hidden px-2.5 py-1 bg-white text-navily-800 border border-navily-300 rounded font-bold text-[11px] shadow-sm"></div>
+      </div>
+
+      <!-- Visual Nautical Map (SVG in Navily Light Theme) -->
+      <div class="p-4 md:p-6 bg-white rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h3 class="font-bold text-navily-900 text-base md:text-lg flex items-center gap-2">
+              <span class="text-amber-500">★</span>
+              <span>Nautische Zeekaart Egeïsche Zee (Basis: Kos)</span>
+            </h3>
+            <p class="text-[11px] text-slate-500">
+              Projectie van 17 havens met directe zeemijlen (NM) over open zee. Klik op een havenmarker voor schipperstactiek.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 text-[11px]">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500 border border-amber-600"></span> Thuisbasis Kos</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Veilig rondom</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Mijden bij S/SE</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Risico/alert</span>
+          </div>
+        </div>
+
+        <!-- SVG Map Container (Light Aegean Blue Background) -->
+        <div class="relative w-full aspect-[16/9] bg-[#eef6fa] rounded-xl border border-slate-200 overflow-hidden">
+          
+          <svg viewBox="0 0 1000 620" class="w-full h-full select-none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Latitude / Longitude Grid Lines -->
+            <g stroke="#d5e5ee" stroke-width="0.8" stroke-dasharray="3,3">
+              <line x1="50" y1="100" x2="950" y2="100" /><text x="60" y="95" fill="#78909c" font-size="10">37° 30' N</text>
+              <line x1="50" y1="240" x2="950" y2="240" /><text x="60" y="235" fill="#78909c" font-size="10">37° 00' N</text>
+              <line x1="50" y1="380" x2="950" y2="380" /><text x="60" y="375" fill="#78909c" font-size="10">36° 30' N</text>
+              <line x1="50" y1="520" x2="950" y2="520" /><text x="60" y="515" fill="#78909c" font-size="10">36° 00' N</text>
+              
+              <line x1="120" y1="40" x2="120" y2="580" /><text x="125" y="575" fill="#78909c" font-size="10">25° 00' E</text>
+              <line x1="380" y1="40" x2="380" y2="580" /><text x="385" y="575" fill="#78909c" font-size="10">26° 00' E</text>
+              <line x1="680" y1="40" x2="680" y2="580" /><text x="685" y="575" fill="#78909c" font-size="10">27° 00' E</text>
+              <line x1="900" y1="40" x2="900" y2="580" /><text x="905" y="575" fill="#78909c" font-size="10">27° 50' E</text>
+            </g>
+
+            <!-- Nautical Course Lines (with NM labels) -->
+            <!-- Kos to Kalymnos (Pothia) -->
+            <line x1="800" y1="280" x2="750" y2="245" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+            <rect x="755" y="255" width="48" height="16" rx="3" fill="#ffffff" stroke="#f59e0b" stroke-width="0.8"/>
+            <text x="779" y="267" fill="#b45309" font-size="10" font-weight="bold" text-anchor="middle">15 NM</text>
+
+            <!-- Kos to Nisyros -->
+            <line x1="800" y1="280" x2="795" y2="340" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+            <rect x="803" y="303" width="48" height="16" rx="3" fill="#ffffff" stroke="#f59e0b" stroke-width="0.8"/>
+            <text x="827" y="315" fill="#b45309" font-size="10" font-weight="bold" text-anchor="middle">18 NM</text>
+
+            <!-- Kos to Symi -->
+            <line x1="800" y1="280" x2="930" y2="390" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.85"/>
+            <rect x="860" y="325" width="48" height="16" rx="3" fill="#ffffff" stroke="#f59e0b" stroke-width="0.8"/>
+            <text x="884" y="337" fill="#b45309" font-size="10" font-weight="bold" text-anchor="middle">32 NM</text>
+
+            <!-- Syros to Amorgos -->
+            <line x1="120" y1="120" x2="430" y2="280" stroke="#10558c" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.6"/>
+            <rect x="250" y="190" width="52" height="17" rx="3" fill="#ffffff" stroke="#10558c" stroke-width="0.8"/>
+            <text x="276" y="202" fill="#10558c" font-size="10" font-weight="bold" text-anchor="middle">58 NM</text>
+
+            <!-- Amorgos to Astypalaia -->
+            <line x1="430" y1="280" x2="570" y2="350" stroke="#10558c" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.75"/>
+            <rect x="480" y="303" width="52" height="17" rx="3" fill="#ffffff" stroke="#10558c" stroke-width="0.8"/>
+            <text x="506" y="315" fill="#10558c" font-size="10" font-weight="bold" text-anchor="middle">29 NM</text>
+
+            <!-- Astypalaia to Kalymnos -->
+            <line x1="570" y1="350" x2="750" y2="245" stroke="#10558c" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.75"/>
+            <rect x="640" y="285" width="52" height="17" rx="3" fill="#ffffff" stroke="#10558c" stroke-width="0.8"/>
+            <text x="666" y="297" fill="#10558c" font-size="10" font-weight="bold" text-anchor="middle">36 NM</text>
+
+            <!-- Amorgos to Santorini -->
+            <line x1="430" y1="280" x2="290" y2="470" stroke="#10558c" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.65"/>
+            <rect x="340" y="365" width="52" height="17" rx="3" fill="#ffffff" stroke="#10558c" stroke-width="0.8"/>
+            <text x="366" y="377" fill="#10558c" font-size="10" font-weight="bold" text-anchor="middle">36 NM</text>
+
+            <!-- Nisyros to Tilos -->
+            <line x1="795" y1="340" x2="850" y2="420" stroke="#10558c" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.75"/>
+            <text x="836" y="382" fill="#10558c" font-size="9" font-weight="bold" text-anchor="middle">16 NM</text>
+
+            <!-- Tilos to Symi -->
+            <line x1="850" y1="420" x2="930" y2="390" stroke="#10558c" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.75"/>
+            <text x="895" y="415" fill="#10558c" font-size="9" font-weight="bold" text-anchor="middle">24 NM</text>
+
+            <!-- LOCATIONS / CLUSTERS -->
+
+            <!-- 0. THUISBASIS KOS (Archon Yachting) -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Kos Harbor (Archon Yachting Base)', 'Officiële thuisbasis (36°53\'38\" N, 27°17\'42\" E). Start- en eindpunt. Uitstekend beschut achter het Johannieter Kasteel en havenhoofd. VHF 77 (Marina) / VHF 12 (Port). Brandstof, proviandering en check-out.')">
+              <circle cx="800" cy="280" r="12" fill="#f59e0b" stroke="#ffffff" stroke-width="3" class="animate-pulse" />
+              <polygon points="800,273 802,278 807,278 803,281 805,286 800,283 795,286 797,281 793,278 798,278" fill="#ffffff"/>
+              <text x="800" y="258" fill="#78350f" font-size="12" font-weight="bold" text-anchor="middle">★ Kos Harbor</text>
+              <text x="800" y="304" fill="#b45309" font-size="9" font-weight="bold" text-anchor="middle">Archon Yachting (Base)</text>
+            </g>
+
+            <!-- 1. SYROS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Finikas & Ermoupoli (Syros)', 'Maritieme hoofdstad van de Cycladen. Finikas biedt topbeschutting bij Meltemi; Ermoupoli grote handelshaven.')">
+              <circle cx="120" cy="120" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <text x="120" y="105" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Syros</text>
+              <text x="120" y="137" fill="#475569" font-size="9" text-anchor="middle">Finikas / Ermoupoli</text>
+            </g>
+
+            <!-- 2. AMORGOS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Katapola & Aegiali (Amorgos)', 'Katapola is diep en veilig bij Meltemi; Aegiali aan noordzijde gevoelig voor valwinden. Rotsklooster Chozoviotissa op de klif.')">
+              <circle cx="430" cy="280" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <circle cx="450" cy="260" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+              <text x="430" y="300" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Amorgos</text>
+              <text x="430" y="312" fill="#475569" font-size="9" text-anchor="middle">Katapola &bull; Aegiali</text>
+            </g>
+
+            <!-- 3. SANTORINI CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Santorini (Vlyhada & Caldera)', 'Caldera 150-350m diep (geen ankerplek). Vlyhada enige marina, maar ondiepe drempel verzandt snel en is gevaarlijk bij S/SE!')">
+              <circle cx="290" cy="470" r="7" fill="#f43f5e" stroke="#ffffff" stroke-width="2" />
+              <text x="290" y="455" fill="#be123c" font-size="11" font-weight="bold" text-anchor="middle">Santorini</text>
+              <text x="290" y="488" fill="#475569" font-size="9" text-anchor="middle">Vlyhada / Caldera</text>
+            </g>
+
+            <!-- 4. ASTYPALAIA CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Astypalaia (Skala & Maltezana)', 'Vlinder-eiland. Skala heeft kadeswell; Maltezana is de sublieme, rondom beschutte ankerbaai op 4m zand.')">
+              <circle cx="570" cy="350" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <circle cx="585" cy="340" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+              <text x="570" y="375" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Astypalaia</text>
+              <text x="570" y="388" fill="#475569" font-size="9" text-anchor="middle">Maltezana &bull; Skala</text>
+            </g>
+
+            <!-- 5. LEROS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Leros (Lakki, Panteli, Agia Marina, Blefouti)', 'Lakki is de ultieme schuilhaven van het gebied. Blefouti vluchthaven bij Sirocco. Panteli voor verse vis.')">
+              <circle cx="720" cy="190" r="8" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <circle cx="735" cy="175" r="4.5" fill="#f59e0b" stroke="#ffffff" stroke-width="1" />
+              <circle cx="715" cy="155" r="5" fill="#10b981" stroke="#ffffff" stroke-width="1" />
+              <text x="715" y="145" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Leros</text>
+              <text x="755" y="195" fill="#475569" font-size="9">Lakki / Blefouti</text>
+            </g>
+
+            <!-- 6. KALYMNOS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Kalymnos (Pothia, Vathi, Palionisos)', 'Pothia: sponsduikers & klimmers. Vathi: prachtige fjord. Palionisos: rustige klifbaai met boeien.')">
+              <circle cx="750" cy="245" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+              <circle cx="758" cy="235" r="6" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
+              <circle cx="745" cy="215" r="6" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
+              <text x="710" y="240" fill="#0a3a60" font-size="11" font-weight="bold">Kalymnos</text>
+            </g>
+
+            <!-- 7. NISYROS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Nisyros (Mandraki & Paloi)', 'Actieve vulkaankrater Stefanos. Mandraki open naar W/S. Paloi haven veiliger bij N/NW.')">
+              <circle cx="795" cy="340" r="6" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5" />
+              <text x="755" y="345" fill="#0a3a60" font-size="11" font-weight="bold">Nisyros</text>
+            </g>
+
+            <!-- 8. TILOS CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Tilos (Livadia)', 'Natura 2000 eiland met Eleonoravalken. Pier met lazy lines. ALARM: Bij draaiing naar E/SE direct losgooien!')">
+              <circle cx="850" cy="420" r="6.5" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5" />
+              <text x="850" y="445" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Tilos</text>
+            </g>
+
+            <!-- 9. SYMI CLUSTER -->
+            <g class="cursor-pointer group" onclick="showMapInfo('Symi (Gialos & Panormitis)', 'Gialos heeft pastelkleurige neoklassieke villa\'s. Panormitis is een volmaakt gesloten fjordbaai bij het klooster.')">
+              <circle cx="930" cy="390" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <text x="930" y="375" fill="#0a3a60" font-size="11" font-weight="bold" text-anchor="middle">Symi</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Dynamic Map Detail Box -->
+        <div id="mapDetailBox" class="mt-3 p-3.5 bg-navily-50 border border-navily-200 rounded-xl text-xs text-slate-700 flex items-center justify-between">
+          <div id="mapDetailText">
+            <span class="text-navily-800 font-bold">Tip:</span> Klik op de gouden ster (Kos Harbor) of andere havens op de kaart om direct de maritieme details, coördinaten en schipperstactiek te bekijken.
+          </div>
+          <span class="text-[10px] bg-white text-navily-800 border border-navily-200 px-2 py-1 rounded ml-3 shrink-0 font-semibold">Interactief</span>
+        </div>
+      </div>
+
+      <!-- Passage Matrix Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-xs md:text-sm">
+          <thead class="bg-navily-50 text-navily-900 uppercase tracking-wider text-[11px] border-b border-slate-200">
+            <tr>
+              <th class="p-3.5">Kritieke Oversteek / Passage</th>
+              <th class="p-3.5">Afstand (NM)</th>
+              <th class="p-3.5">Vaartijd (5.5 knopen)</th>
+              <th class="p-3.5">Zeegebied & Najaarskarakter (Oktober)</th>
+              <th class="p-3.5">Vereist Weervenster</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200/80 text-slate-700">
+            <!-- KOS ROUTES -->
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950">★ Kos Harbor &rarr; Pothia (Kalymnos)</td>
+              <td class="p-3.5 font-mono font-bold text-amber-900">15.2 NM</td>
+              <td class="p-3.5 font-bold text-slate-900">~ 2 uur 45 min</td>
+              <td class="p-3.5 text-slate-600">Startpassage; oversteek door de zeestraat Kos–Kalymnos langs Pserimos. Dolfijnenwaarnemingen.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Ideale openingshop</span></td>
+            </tr>
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950">★ Kos Harbor &rarr; Mandraki/Paloi (Nisyros)</td>
+              <td class="p-3.5 font-mono font-bold text-amber-900">18.1 NM</td>
+              <td class="p-3.5 font-bold text-slate-900">~ 3 uur 15 min</td>
+              <td class="p-3.5 text-slate-600">Directe zuidkoers vanuit Kos langs Kaap Fokas naar het vulkaaneiland.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Halve dag</span></td>
+            </tr>
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950">★ Kos Harbor &rarr; Lakki (Leros)</td>
+              <td class="p-3.5 font-mono font-bold text-amber-900">25.6 NM</td>
+              <td class="p-3.5 font-bold text-slate-900">~ 4 uur 40 min</td>
+              <td class="p-3.5 text-slate-600">Noordwestelijke route langs Kalymnos direct de diepe schuilhaven van Leros in.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Milde bries</span></td>
+            </tr>
+            <tr class="bg-amber-50/70 hover:bg-amber-100/50 border-l-4 border-amber-500 transition">
+              <td class="p-3.5 font-bold text-amber-950">★ Kos Harbor &rarr; Symi (Gialos / Panormitis)</td>
+              <td class="p-3.5 font-mono font-bold text-amber-900">32.3 NM</td>
+              <td class="p-3.5 font-bold text-slate-900">~ 5 uur 50 min</td>
+              <td class="p-3.5 text-slate-600">Zuidoostelijke passage langs het Turkse Datça-schiereiland naar de pastelkleurige haven van Symi.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Dagtocht</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Astypalaia (Skala) &rarr; Katapola (Amorgos)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">28.9 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 5 uur 15 min</td>
+              <td class="p-3.5 text-slate-600">Open passage tussen Dodekanesos en Cycladen; forse zijdelingse deining bij noordenwind.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">12 uur stabiel</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Pothia (Kalymnos) &rarr; Maltezana (Astypalaia)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">36.4 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 6 uur 35 min</td>
+              <td class="p-3.5 text-slate-600">Groot open zeegat; krachtige windversnellingen tussen de kapen van Kos en Kalymnos.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">24 uur stabiel</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Katapola (Amorgos) &rarr; Vlyhada (Santorini)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">36.1 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 6 uur 30 min</td>
+              <td class="p-3.5 text-slate-600">Passage langs Ios; let op valwinden bij nadering van de kraterranden van Santorini.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">24u stabiel (geen S-front)</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Katapola (Amorgos) &rarr; Finikas (Syros)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">57.9 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 10 uur 30 min</td>
+              <td class="p-3.5 text-slate-600">Lange dagtocht dwars door de centrale Cycladen langs Naxos en Paros.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">Volledig dagvenster</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Nisyros &rarr; Livadia (Tilos)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">16.4 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 3 uur 00 min</td>
+              <td class="p-3.5 text-slate-600">Korte oversteek. Ideaal als de wind stabiel uit noordelijke hoek waait.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Halve dag</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-3.5 font-bold text-navily-800">Livadia (Tilos) &rarr; Panormitis (Symi)</td>
+              <td class="p-3.5 font-mono font-bold text-navily-700">24.0 NM</td>
+              <td class="p-3.5 text-slate-800 font-semibold">~ 4 uur 20 min</td>
+              <td class="p-3.5 text-slate-600">Koers richting het zuidwestelijke fjord van Symi; volkomen veilige aankomstkom bij Panormitis.</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold border border-emerald-300">Milde bries</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-6 pb-2 border-t border-slate-200 text-center space-y-2">
+      <p class="text-xs text-slate-600">
+        Interactieve Schippersgids Dodekanesos & Cycladen • Najaarseditie Oktober (35 ft Jachten) • Thuisbasis: Kos Harbor (Archon Yachting Base).
+      </p>
+      <p class="text-[11px] text-slate-400">
+        Afstanden berekend via orthodromische nautische routes (1 NM = 1.852 km). Raadpleeg voor afvaart altijd de actuele marifoonberichten van Olympia Radio (VHF kanaal 16 & werkkanalen) en het Poseidon weermodel.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript for Tabs, Live Search, Map & Calculator -->
+  <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-navily-800', 'text-white', 'shadow');
+        btn.classList.add('bg-white', 'text-slate-600');
+      });
+
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.remove('hidden');
+      }
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'text-slate-600');
+        activeBtn.classList.add('bg-navily-800', 'text-white', 'shadow');
+      }
+    }
+
+    // Live search filter across tables and cards
+    function filterContent() {
+      const input = document.getElementById('quickFilter');
+      const filter = input.value.toLowerCase().trim();
+
+      // Filter tables
+      document.querySelectorAll('.filterable-table tbody tr').forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+
+      // Filter culture cards
+      document.querySelectorAll('.culture-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(filter) ? '' : 'none';
+      });
+
+      // Filter event cards
+      document.querySelectorAll('.event-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }
+
+    // Map Detail Box Display
+    function showMapInfo(title, text) {
+      const box = document.getElementById('mapDetailBox');
+      const textElem = document.getElementById('mapDetailText');
+      if (box && textElem) {
+        textElem.innerHTML = `<strong class="text-navily-800">${title}:</strong> <span class="text-slate-700">${text}</span>`;
+        box.classList.add('border-navily-500');
+      }
+    }
+
+    // Coordinates database for nautical calculation (Lat, Lon)
+    const locCoordinates = {
+      kos: { name: 'Kos Harbor (Archon Yachting Base)', lat: 36.894, lon: 27.295 },
+      lakki: { name: 'Lakki (Leros)', lat: 37.131, lon: 26.852 },
+      panteli: { name: 'Panteli (Leros)', lat: 37.155, lon: 26.859 },
+      blefouti: { name: 'Blefouti (Leros)', lat: 37.189, lon: 26.828 },
+      pothia: { name: 'Pothia (Kalymnos)', lat: 36.949, lon: 26.985 },
+      vathi: { name: 'Vathi (Kalymnos)', lat: 36.974, lon: 27.026 },
+      palionisos: { name: 'Palionisos (Kalymnos)', lat: 37.054, lon: 26.963 },
+      livadia: { name: 'Livadia (Tilos)', lat: 36.417, lon: 27.385 },
+      nisyros: { name: 'Mandraki/Paloi (Nisyros)', lat: 36.615, lon: 27.150 },
+      symi: { name: 'Symi / Panormitis', lat: 36.580, lon: 27.840 },
+      skala: { name: 'Skala (Astypalaia)', lat: 36.549, lon: 26.353 },
+      maltezana: { name: 'Maltezana (Astypalaia)', lat: 36.577, lon: 26.387 },
+      katapola: { name: 'Katapola (Amorgos)', lat: 36.828, lon: 25.864 },
+      aegiali: { name: 'Aegiali (Amorgos)', lat: 36.903, lon: 25.979 },
+      syros: { name: 'Finikas/Ermoupoli (Syros)', lat: 37.420, lon: 24.910 },
+      santorini: { name: 'Vlyhada/Caldera (Santorini)', lat: 36.336, lon: 25.433 }
+    };
+
+    function calculateRoute() {
+      const fromKey = document.getElementById('calcFrom').value;
+      const toKey = document.getElementById('calcTo').value;
+
+      if (fromKey === toKey) {
+        document.getElementById('calcSummary').innerHTML = 'Vertrek en bestemming zijn dezelfde locatie (0.0 NM).';
+        document.getElementById('calcBadge').classList.add('hidden');
+        return;
+      }
+
+      const p1 = locCoordinates[fromKey];
+      const p2 = locCoordinates[toKey];
+
+      // Haversine formula for nautical miles
+      const R = 3440.065; // Earth radius in NM
+      const rad = Math.PI / 180;
+      const dLat = (p2.lat - p1.lat) * rad;
+      const dLon = (p2.lon - p1.lon) * rad;
+      const lat1 = p1.lat * rad;
+      const lat2 = p2.lat * rad;
+
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distNM = (R * c).toFixed(1);
+
+      // Travel time at 5.5 knots
+      const speed = 5.5;
+      const totalHours = distNM / speed;
+      const hours = Math.floor(totalHours);
+      const minutes = Math.round((totalHours - hours) * 60);
+
+      const summaryElem = document.getElementById('calcSummary');
+      const badgeElem = document.getElementById('calcBadge');
+
+      summaryElem.innerHTML = `Van <strong class="text-navily-800">${p1.name}</strong> naar <strong class="text-navily-800">${p2.name}</strong>: hemelsbreed <strong class="text-slate-900 text-sm">${distNM} NM</strong> • Geschatte vaartijd (35ft @ 5.5 kn): <strong class="text-slate-900 text-sm">${hours}u ${minutes}m</strong>`;
+      
+      badgeElem.classList.remove('hidden');
+      if (distNM > 35) {
+        badgeElem.innerHTML = 'Grote Oversteek • 24u Weervenster Vereist';
+        badgeElem.className = 'px-2.5 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded font-bold text-[11px] shadow-sm';
+      } else if (distNM > 15) {
+        badgeElem.innerHTML = 'Middellange Passage • Halve Dagtocht';
+        badgeElem.className = 'px-2.5 py-1 bg-navily-100 text-navily-900 border border-navily-300 rounded font-bold text-[11px] shadow-sm';
+      } else {
+        badgeElem.innerHTML = 'Korte Kusthop • Beschutte Navigatie';
+        badgeElem.className = 'px-2.5 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded font-bold text-[11px] shadow-sm';
+      }
+    }
+  </script>
+</body>
+</html>
