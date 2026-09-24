@@ -20,9 +20,6 @@ Open het bestand direct in je browser:
 # Linux
 xdg-open index.html
 
-# macOS
-open index.html
-
 # Windows (Git Bash)
 start index.html
 ```
@@ -39,7 +36,7 @@ python3 -m http.server 8000
 - **Navigatietabs**: bovenaan de pagina schakel je tussen zeven secties — Wind & Beschutting, Historie & Lokale Cultuur, Lokale Fauna, Najaarsevenementen, Zeekaartgids, Eilandfocus en Kaart & Afstanden.
 - **Snel filteren**: het zoekveld boven de tabs (`quickFilter`) filtert tabelrijen en kaarten op eiland, haven of kenmerk terwijl je typt.
 - **Afstands- en vaartijdcalculator**: in de tab "Kaart & Afstanden" kies je een vertrek- en aankomsthaven; de calculator berekent de afstand in zeemijlen en de geschatte vaartijd op basis van 5,5 knopen.
-- **Interactieve zeekaart**: een inline SVG-kaart met 17 havens; klik op een havenmarker voor schipperstactiek per locatie.
+- **Interactieve zeekaart**: een inline SVG-kaart met havenmarkers; klik op een havenmarker voor schipperstactiek per locatie.
 
 ## Structuur
 
